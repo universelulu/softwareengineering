@@ -1,5 +1,7 @@
 package b635310;
 
+import java.util.Arrays;
+
 public class PerformanceTest {
 	public static void main(String[] args) {
         
@@ -11,8 +13,11 @@ public class PerformanceTest {
             books[i] = new Book(i+1, "Book " + i+1);
         }
 
+        // 책들을 id를 기준으로 오름차순 정렬
+	    Arrays.sort(books, (b1, b2) -> Integer.compare(b1.getId(), b2.getId()));
+	    
         long startTime = System.nanoTime(); // 성능 테스트 시작 시간
-        Book result = BookSearch.search_bs(books, books[500000].getId()); // search_bs 함수 시행
+        BookSearch.search_bs(books, books[500000].getId()); // search_bs() 함수 시행
         long endTime = System.nanoTime(); // 성능 테스트 종료 시간
 
         System.out.println("search_bs 수행 시간: " + (endTime - startTime) + " 나노초");
