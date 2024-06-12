@@ -8,7 +8,7 @@ public class PerformanceTest {
         
         for (int i = 0; i < books.length; i++) // 객체별 id, 제목 설정
         {
-            books[i] = new Book(i, "Book " + i);
+            books[i] = new Book(i+1, "Book " + i+1);
         }
 
         long startTime = System.nanoTime(); // 성능 테스트 시작 시간
