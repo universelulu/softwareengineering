@@ -12,7 +12,7 @@ public class PerformanceTest {
         }
 
         long startTime = System.nanoTime(); // 성능 테스트 시작 시간
-        Book result = BookSearch.search_bs(books, books[500000].getId()); // search_bs() 함수 시행
+        Book result = BookSearch.search_bs(books, books[500000].getId()); // search_bs 함수 시행
         long endTime = System.nanoTime(); // 성능 테스트 종료 시간
 
         System.out.println("search_bs 수행 시간: " + (endTime - startTime) + " 나노초");
