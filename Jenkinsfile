@@ -9,7 +9,7 @@ pipeline {
         }
         stage('Build') { // 빌드 스테이지
             steps {
-                bat 'javac -encoding UTF-8 -d classes b635310/src/b635310/**/*.java' // Java 파일 컴파일
+                bat 'javac -encoding UTF-8 -d classes b635310/src/b635310/*.java' // Java 파일 컴파일
             }
         }
         stage('Test') { // 테스트 스테이지
