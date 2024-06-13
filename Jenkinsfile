@@ -10,7 +10,7 @@ pipeline{
         }
         stage('Build'){
             steps{
-                bat 'find b635310/src/b635420 -name "*.java" -print | xargs javac -encoding UTF-8 -d classes'
+                bat 'find b635310/src/ -name "*.java" -exec javac -encoding UTF-8 -d classes {} +'
             }
         }
     }
