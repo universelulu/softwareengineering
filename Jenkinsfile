@@ -34,8 +34,8 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    // Maven을 이용한 테스트 실행
-                    sh 'mvn test'
+                    
+                    bat 'mvn test'
                 }
             }
             post {
