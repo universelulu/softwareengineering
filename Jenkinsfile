@@ -2,16 +2,13 @@ pipeline {
     agent any
 
     tools {
-        // Jenkins Global Tool Configuration에서 설정한 Git 툴의 이름을 여기에 입력하세요.
         git 'Git'
-        // Jenkins Global Tool Configuration에서 설정한 Maven 툴의 이름을 여기에 입력하세요.
         maven 'Maven'
     }
 
     stages {
         stage('Clone Repository') {
             steps {
-                // Git repository 클론
                 checkout([$class: 'GitSCM', 
                           branches: [[name: 'main']], 
                           userRemoteConfigs: [[credentialsId: 'Hongik-Test', 
@@ -21,21 +18,20 @@ pipeline {
         
         stage('Build') {
             steps {
-                // Maven을 이용한 clean install
-                tool 'Maven'
-                bat 'mvn clean install'
+                withMaven(maven: 'Maven') {
+                    bat 'mvn clean install'
+                }
             }
         }
         
         stage('Test') {
             steps {
-                // Maven을 이용한 테스트 실행
-                tool 'Maven'
-                bat 'mvn test'
+                withMaven(maven: 'Maven') {
+                    bat 'mvn test'
+                }
             }
             post {
                 always {
-                    // JUnit 테스트 결과 저장
                     junit '**/target/surefire-reports/*.xml'
                 }
             }
@@ -43,13 +39,12 @@ pipeline {
         
         stage('Performance Test') {
             steps {
-                // 성능 테스트 실행
-                tool 'Maven'
-                bat 'mvn exec:java -Dexec.mainClass="com.example.PerformanceTest"'
+                withMaven(maven: 'Maven') {
+                    bat 'mvn exec:java -Dexec.mainClass="com.example.PerformanceTest"'
+                }
             }
             post {
                 always {
-                    // 성능 테스트 결과 아카이브
                     archiveArtifacts artifacts: '**/performance-reports/**', allowEmptyArchive: true
                 }
             }
@@ -58,7 +53,6 @@ pipeline {
 
     post {
         always {
-            // 워크스페이스 정리
             cleanWs()
         }
     }
