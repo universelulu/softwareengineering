@@ -5,7 +5,7 @@ pipeline {
         stage('Clone Repository') {
             steps {
                 // Git 저장소를 클론합니다. 이 저장소는 소프트웨어공학 2024년 1학기의 과제에 쓰인 저장소입니다.
-                git url: 'https://github.com/yourusername/your-repository.git', branch: 'main', credentialsId: 'softwareengineering'
+                git url: 'https://github.com/guraudrk/softwareengineering.git', branch: 'main', credentialsId: 'softwareengineering'
             }
         }
         stage('Build') {
