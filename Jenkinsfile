@@ -1,6 +1,13 @@
 pipeline {
     agent any
 
+    tools {
+        // Global Tool Configuration에서 설정한 Git 툴의 이름을 여기에 입력하세요.
+        git 'Git'
+        // Maven의 경우에도 필요한 경우 추가할 수 있습니다.
+        // maven 'Maven'
+    }
+
     stages {
         stage('Clone Repository') {
             steps {
@@ -12,7 +19,7 @@ pipeline {
                               extensions: [], 
                               submoduleCfg: [], 
                               userRemoteConfigs: [[credentialsId: 'Hongik-Test', 
-                                                    url: 'https://github.com/guraudrk/softwareengineering.git']]]) 
+                                                    url: 'https://github.com/guraudrk/softwareengineering.git']]])
                 }
             }
         }
@@ -41,8 +48,8 @@ pipeline {
         stage('Performance Test') {
             steps {
                 script {
-                    // 성능 테스트 실행
-                    bat 'start /B mvn exec:java -Dexec.mainClass="com.example.PerformanceTest"'
+                    // 성능 테스트 실행 (Windows에서는 'bat' 사용)
+                    bat 'mvn exec:java -Dexec.mainClass="com.example.PerformanceTest"'
                 }
             }
             post {
