@@ -6,30 +6,40 @@ pipeline {
         maven 'Maven' // Maven도 추가로 설정되어 있어야 합니다.
     }
 
+    environment {
+        GIT_CREDENTIALS = credentials('Hongik-Test') // Jenkins에 저장된 크리덴셜 ID 사용
+    }
+
     stages {
         stage('Clone Repository') {
             steps {
-                checkout([$class: 'GitSCM', 
-                          branches: [[name: 'main']], 
-                          userRemoteConfigs: [[credentialsId: 'Hongik-Test', 
-                                                url: 'https://github.com/guraudrk/softwareengineering.git']]])
+                timeout(time: 10, unit: 'MINUTES') { // 타임아웃 설정
+                    checkout([$class: 'GitSCM', 
+                              branches: [[name: 'main']], 
+                              userRemoteConfigs: [[credentialsId: GIT_CREDENTIALS, 
+                                                    url: 'https://github.com/guraudrk/softwareengineering.git']]])
+                }
             }
         }
         
         stage('Build') {
             steps {
-                script {
-                    def mvnHome = tool name: 'Maven', type: 'maven'
-                    bat "${mvnHome}\\bin\\mvn clean install"
+                timeout(time: 20, unit: 'MINUTES') { // 타임아웃 설정
+                    script {
+                        def mvnHome = tool name: 'Maven', type: 'maven'
+                        bat "${mvnHome}\\bin\\mvn clean install"
+                    }
                 }
             }
         }
         
         stage('Test') {
             steps {
-                script {
-                    def mvnHome = tool name: 'Maven', type: 'maven'
-                    bat "${mvnHome}\\bin\\mvn test"
+                timeout(time: 20, unit: 'MINUTES') { // 타임아웃 설정
+                    script {
+                        def mvnHome = tool name: 'Maven', type: 'maven'
+                        bat "${mvnHome}\\bin\\mvn test"
+                    }
                 }
             }
             post {
@@ -41,9 +51,11 @@ pipeline {
         
         stage('Performance Test') {
             steps {
-                script {
-                    def mvnHome = tool name: 'Maven', type: 'maven'
-                    bat "${mvnHome}\\bin\\mvn exec:java -Dexec.mainClass=\"com.example.PerformanceTest\""
+                timeout(time: 30, unit: 'MINUTES') { // 타임아웃 설정
+                    script {
+                        def mvnHome = tool name: 'Maven', type: 'maven'
+                        bat "${mvnHome}\\bin\\mvn exec:java -Dexec.mainClass=\"com.example.PerformanceTest\""
+                    }
                 }
             }
             post {
