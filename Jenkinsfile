@@ -1,30 +1,25 @@
 pipeline {
-    agent any
+    agent any // 에이전트 설정
 
     stages {
-        stage('Checkout') {
+        stage('Checkout') { // 체크아웃 스테이지
             steps {
-                // 소스 코드 체크아웃
-                checkout scm
+                checkout scm // 소스 코드 체크아웃
             }
         }
-        stage('Build') {
+        stage('Build') { // 빌드 스테이지
             steps {
-                // PowerShell을 사용하여 Java 파일들을 컴파일
-                powershell '''
-                Get-ChildItem -Path ./b635310/src/b635310 -Recurse -Include *.java | ForEach-Object {
-                    $javaFile = $_.FullName
-                    $className = $_.BaseName
-                    $utf8Path = [System.Text.Encoding]::UTF8.GetString([System.Text.Encoding]::Unicode.GetBytes($javaFile))
-                    Write-Host "Compiling $javaFile"
-                    javac -d classes "C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\hongs\\b635310\\src\\b635310\\Book.java"
-                    javac -d classes "C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\hongs\\b635310\\src\\b635310\\BookSearch.java"
-                    javac -d classes "C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\hongs\\b635310\\src\\b635310\\BookSearchTest.java"
-                    javac -d classes "C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\hongs\\b635310\\src\\b635310\\PerformanceTest.java"
-
-
-                }
-                '''
+                sh 'javac -d classes src/*.java' // Java 파일 컴파일
+            }
+        }
+        stage('Test') { // 테스트 스테이지
+            steps {
+                sh 'java -cp classes YourTestClass' // 테스트 실행
+            }
+        }
+        stage('Deploy') { // 배포 스테이지
+            steps {
+                sh 'scp -r classes user@server:/path/to/destination' // 배포 명령어 실행
             }
         }
     }
