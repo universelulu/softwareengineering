@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     tools {
-        git 'Git'   // Jenkins에서 설정한 Git Tool을 사용
-        maven 'Maven'  // Jenkins에서 설정한 Maven Tool을 사용
+        git 'Git'
+        maven 'Maven'
     }
 
     stages {
@@ -18,22 +18,18 @@ pipeline {
         
         stage('Build') {
             steps {
-                // withMaven 블록 내부에서 bat 또는 sh 스텝을 사용하지 않고,
-                // withMaven 블록 안에서 Maven 플러그인을 통해 명령을 실행하는 방식으로 수정
                 script {
                     def mvnHome = tool name: 'Maven', type: 'maven'
-                    sh "${mvnHome}/bin/mvn clean install"
+                    bat "${mvnHome}\\bin\\mvn clean install"
                 }
             }
         }
         
         stage('Test') {
             steps {
-                // withMaven 블록 내부에서 bat 또는 sh 스텝을 사용하지 않고,
-                // withMaven 블록 안에서 Maven 플러그인을 통해 명령을 실행하는 방식으로 수정
                 script {
                     def mvnHome = tool name: 'Maven', type: 'maven'
-                    sh "${mvnHome}/bin/mvn test"
+                    bat "${mvnHome}\\bin\\mvn test"
                 }
             }
             post {
@@ -45,11 +41,9 @@ pipeline {
         
         stage('Performance Test') {
             steps {
-                // withMaven 블록 내부에서 bat 또는 sh 스텝을 사용하지 않고,
-                // withMaven 블록 안에서 Maven 플러그인을 통해 명령을 실행하는 방식으로 수정
                 script {
                     def mvnHome = tool name: 'Maven', type: 'maven'
-                    sh "${mvnHome}/bin/mvn exec:java -Dexec.mainClass=\"com.example.PerformanceTest\""
+                    bat "${mvnHome}\\bin\\mvn exec:java -Dexec.mainClass=\"com.example.PerformanceTest\""
                 }
             }
             post {
