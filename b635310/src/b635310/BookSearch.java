@@ -4,7 +4,6 @@ import java.util.Arrays;
 
 public class BookSearch {
 	
-	//새로운 책 함수인 search_bs를 구현한다.
 	 public static Book search_bs(Book[] books, int bookId) {
 	        
 		    // 책들을 id를 기준으로 오름차순 정렬
@@ -24,12 +23,12 @@ public class BookSearch {
 	                return books[midIndex];
 	            } 
 	            
-	            else if (books[midIndex].getId() < bookId) // 찾고자 하는 bookId가 더 크다면 left 1 증가
+	            else if (books[midIndex].getId() < bookId) // 찾고자 하는 bookId가 중간 인덱스 객체의 id보다 더 크다면 left 1 증가
 	            {
 	                left = midIndex + 1; 
 	            }
 	            
-	            else // 찾고자 하는 bookId가 더 작다면 right 1 감소
+	            else // 찾고자 하는 bookId가 중간 인덱스 객체의 id보다 더 작다면 right 1 감소
 	            {
 	                right = midIndex - 1;
 	            }

@@ -12,7 +12,7 @@ public class PerformanceTest {
         {
             books[i] = new Book(i+1, "Book " + i+1);
         }
-
+        
         // 책들을 id를 기준으로 오름차순 정렬
 	    Arrays.sort(books, (b1, b2) -> Integer.compare(b1.getId(), b2.getId()));
 	    
