@@ -11,7 +11,7 @@ pipeline {
                               doGenerateSubmoduleConfigurations: false, 
                               extensions: [], 
                               submoduleCfg: [], 
-                              userRemoteConfigs: [[credentialsId: 'softwareengineering', 
+                              userRemoteConfigs: [[credentialsId: 'Hongik-Test', 
                                                     url: 'https://github.com/guraudrk/softwareengineering.git']]]) 
                 }
             }
