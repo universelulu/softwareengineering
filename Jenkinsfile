@@ -28,16 +28,17 @@ pipeline {
         }
         stage('Performance Test') {
             steps {
-                // 성능 테스트를 실행합니다.
-                sh 'mvn exec:java -Dexec.mainClass="com.example.PerformanceTest"'
-            }
-            post {
-                always {
-                    // 성능 테스트 결과를 저장합니다.
-                    archiveArtifacts artifacts: '**/performance-reports/**', allowEmptyArchive: true
-                }
-            }
+        script {
+            // 성능 테스트를 실행합니다. nohup 대신 PowerShell의 Start-Process를 사용합니다.
+            bat 'start /B mvn exec:java -Dexec.mainClass="com.example.PerformanceTest"'
         }
+    }
+    post {
+        always {
+            // 성능 테스트 결과를 저장합니다.
+            archiveArtifacts artifacts: '**/performance-reports/**', allowEmptyArchive: true
+        }
+    }
     }
 
     post {
