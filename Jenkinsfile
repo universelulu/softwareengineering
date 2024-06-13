@@ -4,8 +4,8 @@ pipeline {
     tools {
         // Jenkins Global Tool Configuration에서 설정한 Git 툴의 이름을 여기에 입력하세요.
         git 'Git'
-        // Maven을 추가할 경우, Global Tool Configuration에서 설정한 Maven 툴의 이름을 입력하세요.
-        // maven 'Maven'
+        // Jenkins Global Tool Configuration에서 설정한 Maven 툴의 이름을 여기에 입력하세요.
+        maven 'Maven'
     }
 
     stages {
