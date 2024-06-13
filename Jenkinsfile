@@ -14,6 +14,7 @@ pipeline {
                 powershell '''
                 Get-ChildItem -Path ./b635310/src/b635310 -Recurse -Include *.java | ForEach-Object {
                     $javaFile = $_.FullName
+                    $className = $_.BaseName
                     $utf8Path = [System.Text.Encoding]::UTF8.GetString([System.Text.Encoding]::Unicode.GetBytes($javaFile))
                     Write-Host "Compiling $javaFile"
                     javac -d classes $utf8Path
