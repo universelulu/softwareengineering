@@ -10,7 +10,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                // MAVEN을 통해 프로젝트를 빌드합니다.
+                // MAVEN을 통해 프로젝트를 빌드합니다..
                 sh 'mvn clean install'
             }
         }
