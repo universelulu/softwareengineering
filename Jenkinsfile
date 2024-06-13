@@ -17,10 +17,11 @@ pipeline {
                     $className = $_.BaseName
                     $utf8Path = [System.Text.Encoding]::UTF8.GetString([System.Text.Encoding]::Unicode.GetBytes($javaFile))
                     Write-Host "Compiling $javaFile"
-                    javac -d classes C:\ProgramData\Jenkins\.jenkins\workspace\hongs\b635310\src\b635310\Book.java
-                    javac -d classes C:\ProgramData\Jenkins\.jenkins\workspace\hongs\b635310\src\b635310\BookSearch.java
-                    javac -d classes C:\ProgramData\Jenkins\.jenkins\workspace\hongs\b635310\src\b635310\BookSearchTest.java
-                    javac -d classes C:\ProgramData\Jenkins\.jenkins\workspace\hongs\b635310\src\b635310\PerformanceTest.java
+                    javac -d classes "C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\hongs\\b635310\\src\\b635310\\Book.java"
+                    javac -d classes "C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\hongs\\b635310\\src\\b635310\\BookSearch.java"
+                    javac -d classes "C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\hongs\\b635310\\src\\b635310\\BookSearchTest.java"
+                    javac -d classes "C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\hongs\\b635310\\src\\b635310\\PerformanceTest.java"
+
 
                 }
                 '''
