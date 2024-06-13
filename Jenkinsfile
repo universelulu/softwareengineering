@@ -11,30 +11,27 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                script {
-                    // Git repository 클론
-                    checkout([$class: 'GitSCM', 
-                              branches: [[name: '*/main']], 
-                              doGenerateSubmoduleConfigurations: false, 
-                              extensions: [], 
-                              submoduleCfg: [], 
-                              userRemoteConfigs: [[credentialsId: 'Hongik-Test', 
-                                                    url: 'https://github.com/guraudrk/softwareengineering.git']]])
-                }
+                // Git repository 클론
+                checkout([$class: 'GitSCM', 
+                          branches: [[name: 'main']], 
+                          userRemoteConfigs: [[credentialsId: 'Hongik-Test', 
+                                                url: 'https://github.com/guraudrk/softwareengineering.git']]])
             }
         }
+        
         stage('Build') {
             steps {
-                script {
-                    // Maven을 이용한 clean install
+                // Maven을 이용한 clean install
+                withMaven(maven: 'Maven') {
                     bat 'mvn clean install'
                 }
             }
         }
+        
         stage('Test') {
             steps {
-                script {
-                    // Maven을 이용한 테스트 실행
+                // Maven을 이용한 테스트 실행
+                withMaven(maven: 'Maven') {
                     bat 'mvn test'
                 }
             }
@@ -45,10 +42,11 @@ pipeline {
                 }
             }
         }
+        
         stage('Performance Test') {
             steps {
-                script {
-                    // 성능 테스트 실행
+                // 성능 테스트 실행
+                withMaven(maven: 'Maven') {
                     bat 'mvn exec:java -Dexec.mainClass="com.example.PerformanceTest"'
                 }
             }
