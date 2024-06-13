@@ -22,18 +22,16 @@ pipeline {
         stage('Build') {
             steps {
                 // Maven을 이용한 clean install
-                withMaven(maven: 'Maven') {
-                    bat 'mvn clean install'
-                }
+                tool 'Maven'
+                bat 'mvn clean install'
             }
         }
         
         stage('Test') {
             steps {
                 // Maven을 이용한 테스트 실행
-                withMaven(maven: 'Maven') {
-                    bat 'mvn test'
-                }
+                tool 'Maven'
+                bat 'mvn test'
             }
             post {
                 always {
@@ -46,9 +44,8 @@ pipeline {
         stage('Performance Test') {
             steps {
                 // 성능 테스트 실행
-                withMaven(maven: 'Maven') {
-                    bat 'mvn exec:java -Dexec.mainClass="com.example.PerformanceTest"'
-                }
+                tool 'Maven'
+                bat 'mvn exec:java -Dexec.mainClass="com.example.PerformanceTest"'
             }
             post {
                 always {
