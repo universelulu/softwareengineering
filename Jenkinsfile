@@ -9,17 +9,17 @@ pipeline {
         }
         stage('Build') { // 빌드 스테이지
             steps {
-                sh 'javac -d classes b635310/src/b635310/*.java' // Java 파일 컴파일
+                bat 'javac -d classes b635310/src/b635310/*.java' // Java 파일 컴파일
             }
         }
         stage('Test') { // 테스트 스테이지
             steps {
-                sh 'java -cp classes YourTestClass' // 테스트 실행
+                bat 'java -cp classes YourTestClass' // 테스트 실행
             }
         }
         stage('Deploy') { // 배포 스테이지
             steps {
-                sh 'scp -r classes user@server:/path/to/destination' // 배포 명령어 실행
+                bat 'scp -r classes user@server:/path/to/destination' // 배포 명령어 실행
             }
         }
     }
