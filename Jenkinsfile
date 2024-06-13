@@ -10,7 +10,8 @@ pipeline{
         }
         stage('Build'){
             steps{
-                bat 'javac -encoding UTF-8 -d classes b635310/src/**/*.java'
+                bat 'find b635310/src/b635310 -name "*.java" -exec javac -encoding UTF-8 -d classes {} +
+'
             }
         }
     }
