@@ -2,17 +2,22 @@ pipeline {
     agent any
 
     stages {
-        stage("Checkout") {
+        stage('Checkout') {
             steps {
-                // 소스코드 체크아웃
+                // 소스 코드 체크아웃
                 checkout scm
             }
         }
         stage('Build') {
             steps {
-                // Java 소스 파일 목록을 나열
-               bat 'mkdir classes'
-               bat 'javac -encoding UTF-8 -d classes b635310/src/b635310/**/*.java'
+                // PowerShell을 사용하여 Java 파일들을 컴파일
+                powershell '''
+                Get-ChildItem -Path .\b635310\src\b635310 -Recurse -Include *.java | ForEach-Object {
+                    $javaFile = $_.FullName
+                    Write-Host "Compiling $javaFile"
+                    javac -d classes $javaFile
+                }
+                '''
             }
         }
     }
