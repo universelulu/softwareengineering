@@ -16,7 +16,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                // JUnit 테스트 실행합니다.
+                // JUnit 테스트를 실행합니다.
                 sh 'mvn test'
             }
             post {
