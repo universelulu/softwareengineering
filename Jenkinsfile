@@ -14,8 +14,8 @@ pipeline {
                 // Git repository 클론
                 checkout([$class: 'GitSCM', 
                           branches: [[name: 'main']], 
-                          userRemoteConfigs: [[credentialsId: 'Hongik-Test', 
-                                                url: 'https://github.com/guraudrk/softwareengineering.git']]])
+                          userRemoteConfigs: [[credentialsId: 'hongt', 
+                                                url: 'https://github.com/universelulu/softwareengineering.git']]])
             }
         }
         
