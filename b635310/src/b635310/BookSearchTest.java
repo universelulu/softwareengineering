@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class BookSearchTest {
 
        //유효한 책 id와 유효하지 않은 책 id를 사용해서 search_bs를 테스트한다.
-       @Test
+	   @org.junit.jupiter.api.Test
        public void testSearchBs() {
     	
     	   // 객체 베열 생성   
