@@ -11,7 +11,7 @@ pipeline {
         
         stage('Build') {
             steps {
-                bat 'mvn clean install'
+                bat 'javac -encoding UTF-8 -d classes b635310/src/b635310/*.java'
             }
         }
         
